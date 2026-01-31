@@ -40,7 +40,34 @@ public class StudentService {
     }
 
 
-   
+    //U
+    public StudentEntity update(Long id, StudentEntity studentEntity){
+        StudentEntity oldStudent = studentRepo.findById(id).orElseThrow(
+                ()-> new RuntimeException("Student not found"));
+
+        oldStudent.setName(studentEntity.getName());
+        oldStudent.setSurname(studentEntity.getSurname());
+        oldStudent.setEmail(studentEntity.getEmail());
+        oldStudent.setAddress(studentEntity.getPhoneNumber());
+        oldStudent.setPhoneNumber(studentEntity.getPhoneNumber());
+
+        return studentRepo.save(oldStudent);
+
+    }
+
+
+    //D
+    public void delete(Long id){
+        studentRepo.deleteById(id);
+    }
+
+
+
+    @PreDestroy
+    void destroy(){
+        studentRepo.deleteAll();
+        System.out.println("Data has been deleted");
+    }
 
 
 }

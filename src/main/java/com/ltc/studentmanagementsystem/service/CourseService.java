@@ -27,6 +27,29 @@ public class CourseService {
     }
 
 
+    //R
+    public List<CourseEntity> getAll(){
+        return courseRepo.findAll();
+    }
 
+
+    //U
+    public CourseEntity update(Long id, CourseEntity courseEntity){
+        CourseEntity oldCourse = courseRepo.findById(id).orElseThrow(
+                () -> new RuntimeException("Course Not Found"));
+
+        oldCourse.setCourseName(courseEntity.getCourseName());
+        oldCourse.setPrice(courseEntity.getPrice());
+        oldCourse.setAddress(courseEntity.getAddress());
+
+        return courseRepo.save(oldCourse);
+
+    }
+
+
+    //D
+    public void delete(Long id) {
+        courseRepo.deleteById(id);
+    }
 
 }

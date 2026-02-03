@@ -1,7 +1,11 @@
 package com.ltc.studentmanagementsystem.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Entity
@@ -20,15 +24,14 @@ public class StudentEntity {
     private String surname;
 
     @Email(message = "Write your email correctly, please." ,
-            regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$\n")
+            regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")
     private String email;
 
     @NotEmpty(message = "Address info must be fully provided.")
     private String address;
 
     @NotNull (message = "Write correct phone number format.")
-    @Pattern(regexp = "^\\+?[0-9\\s\\-()]{7,20}$\n")
+    @Pattern(regexp = "^\\+?[0-9\\s\\-()]{7,20}$")
     private String phoneNumber;
-
 
 }

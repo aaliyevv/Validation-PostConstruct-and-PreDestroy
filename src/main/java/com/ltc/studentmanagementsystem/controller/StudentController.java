@@ -2,12 +2,21 @@ package com.ltc.studentmanagementsystem.controller;
 
 import com.ltc.studentmanagementsystem.model.StudentEntity;
 import com.ltc.studentmanagementsystem.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@ResponseStatus
+@RestController
 @RequestMapping("/students")
 public class StudentController {
 
@@ -22,7 +31,7 @@ public class StudentController {
     //C
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public StudentEntity create(@RequestParam StudentEntity studentEntity){
+    public StudentEntity create(@Valid @RequestBody StudentEntity studentEntity){
         return studentService.create(studentEntity);
     }
 
@@ -33,6 +42,7 @@ public class StudentController {
     public StudentEntity getById(@PathVariable Long id){
         return studentService.getById(id);
     }
+
 
     //R
     @GetMapping
@@ -45,16 +55,18 @@ public class StudentController {
     //U
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public StudentEntity update(@PathVariable Long id, @RequestParam StudentEntity studentEntity){
+    public StudentEntity update(@PathVariable Long id,
+                                @Valid @RequestBody StudentEntity studentEntity){
         return studentService.update(id, studentEntity);
     }
 
 
     //D
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void delete(@PathVariable Long id){
         studentService.delete(id);
     }
+
 
 }

@@ -17,7 +17,7 @@ public class StudentService {
 
     @PostConstruct
     public void init(){
-        System.out.println("System is up");
+        System.out.println("Student Management System is up.");
     }
 
 
@@ -48,7 +48,7 @@ public class StudentService {
         oldStudent.setName(studentEntity.getName());
         oldStudent.setSurname(studentEntity.getSurname());
         oldStudent.setEmail(studentEntity.getEmail());
-        oldStudent.setAddress(studentEntity.getPhoneNumber());
+        oldStudent.setAddress(studentEntity.getAddress());
         oldStudent.setPhoneNumber(studentEntity.getPhoneNumber());
 
         return studentRepo.save(oldStudent);
@@ -68,6 +68,5 @@ public class StudentService {
         studentRepo.deleteAll();
         System.out.println("Data has been deleted");
     }
-
 
 }
